@@ -23,8 +23,8 @@ INCLUDE_PATH          = -I../libzmq/include \
 			-I.
 DLL_PATH              =
 DLL_IMPORTS           =
-LIBRARY_PATH          =
-LIBRARIES             =
+LIBRARY_PATH          = -L/usr/local/lib
+LIBRARIES             = -lzmq
 
 
 ### libzmq_wrapper.dll sources and settings
