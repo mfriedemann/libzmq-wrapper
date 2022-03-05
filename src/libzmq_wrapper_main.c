@@ -10,6 +10,8 @@
 #include "config.h"
 
 #include <stdarg.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 #include "windef.h"
 #include "winbase.h"
@@ -31,21 +33,25 @@ void TRACE(char * msg, ...) {
 }
 #endif
 
-BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, void *reserved)
-{
-    TRACE("(%p, %u, %p)\n", instance, reason, reserved);
+// flag indicating offline mode (skip _connect() etc.)
+// set via env LIBZMQ_WRAPPER_OFFLINE
+bool offline = true;
 
-    switch (reason)
-    {
-        case DLL_WINE_PREATTACH:
-            return FALSE;    /* prefer native version */
-        case DLL_PROCESS_ATTACH:
-            DisableThreadLibraryCalls(instance);
-            break;
+BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, void * reserved) {
+    char * offlineEnv = NULL;
+    switch (reason) {
+	case DLL_PROCESS_ATTACH:
+	    offlineEnv = getenv("LIBZMQ_WRAPPER_OFFLINE");
+	    offline = (NULL != offlineEnv && 0 != strncmp("FALSE", offlineEnv, 5));
+	    TRACE("libzmq: proxy DLL loaded%s\n", offline ? ", mode=OFFLINE" : "");
+	    break;
+	case DLL_PROCESS_DETACH:
+	    TRACE("libzmq: proxy DLL detached\n");
+	    break;
     }
-
     return TRUE;
 }
+
 /******************************************************************
  *		zmq_atomic_counter_dec (LIBZMQ_WRAPPER.1)
  *
