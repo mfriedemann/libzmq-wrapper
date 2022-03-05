@@ -18,6 +18,19 @@
 
 WINE_DEFAULT_DEBUG_CHANNEL(libzmq_wrapper);
 
+#ifndef __WINESRC__
+void FIXME(char * msg) {
+    printf(msg);
+}
+
+void TRACE(char * msg, ...) {
+    va_list argp;
+    va_start(argp, msg);
+    vprintf(msg, argp);
+    va_end(argp);
+}
+#endif
+
 BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, void *reserved)
 {
     TRACE("(%p, %u, %p)\n", instance, reason, reserved);

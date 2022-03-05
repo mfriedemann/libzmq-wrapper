@@ -6,7 +6,7 @@
 
 SRCDIR                = .
 SUBDIRS               =
-DLLS                  = src.dll
+DLLS                  = libzmq_wrapper.dll
 LIBS                  =
 EXES                  =
 
@@ -27,37 +27,33 @@ LIBRARY_PATH          =
 LIBRARIES             =
 
 
-### src.dll sources and settings
+### libzmq_wrapper.dll sources and settings
 
-src_dll_MODULE        = src.dll
-src_dll_C_SRCS        = libzmq_wrapper_main.c
-src_dll_CXX_SRCS      =
-src_dll_RC_SRCS       =
-src_dll_LDFLAGS       = -shared \
-			$(src_dll_MODULE:.dll=.spec) \
-			-mno-cygwin \
-			-m32
-src_dll_ARFLAGS       =
-src_dll_DLL_PATH      =
-src_dll_DLLS          = odbc32 \
-			ole32 \
-			oleaut32 \
-			winspool \
-			odbccp32
-src_dll_LIBRARY_PATH  =
-src_dll_LIBRARIES     = uuid
+libzmq_wrapper_dll_MODULE     = libzmq_wrapper.dll
+libzmq_wrapper_dll_C_SRCS     = libzmq_wrapper_main.c
+libzmq_wrapper_dll_CXX_SRCS   =
+libzmq_wrapper_dll_RC_SRCS    =
+libzmq_wrapper_dll_LDFLAGS    = -shared \
+				$(libzmq_wrapper_dll_MODULE:.dll=.spec) \
+				-mno-cygwin \
+				-m32
+libzmq_wrapper_dll_ARFLAGS    =
+libzmq_wrapper_dll_DLL_PATH   =
+libzmq_wrapper_dll_DLLS       =
+libzmq_wrapper_dll_LIB_PATH   =
+libzmq_wrapper_dll_LIBRARIES  =
 
-src_dll_OBJS          = $(src_dll_C_SRCS:.c=.o) \
-			$(src_dll_CXX_SRCS:.cpp=.o) \
-			$(src_dll_RC_SRCS:.rc=.res)
+libzmq_wrapper_dll_OBJS       = $(libzmq_wrapper_dll_C_SRCS:.c=.o) \
+				$(libzmq_wrapper_dll_CXX_SRCS:.cpp=.o) \
+				$(libzmq_wrapper_dll_RC_SRCS:.rc=.res)
 
 
 
 ### Global source lists
 
-C_SRCS                = $(src_dll_C_SRCS)
-CXX_SRCS              = $(src_dll_CXX_SRCS)
-RC_SRCS               = $(src_dll_RC_SRCS)
+C_SRCS                = $(libzmq_wrapper_dll_C_SRCS)
+CXX_SRCS              = $(libzmq_wrapper_dll_CXX_SRCS)
+RC_SRCS               = $(libzmq_wrapper_dll_RC_SRCS)
 
 
 ### Tools
@@ -114,7 +110,9 @@ $(EXTRASUBDIRS:%=%/__clean__): dummy
 ### Target specific build rules
 DEFLIB = $(LIBRARY_PATH) $(LIBRARIES) $(DLL_PATH) $(DLL_IMPORTS:%=-l%)
 
-$(src_dll_MODULE).so: $(src_dll_OBJS) $(src_dll_MODULE:.dll=.spec)
-	$(CC) $(src_dll_LDFLAGS) -o $@ $(src_dll_OBJS) $(src_dll_LIBRARY_PATH) $(src_dll_DLL_PATH) $(DEFLIB) $(src_dll_DLLS:%=-l%) $(src_dll_LIBRARIES:%=-l%)
+$(libzmq_wrapper_dll_MODULE).so: $(libzmq_wrapper_dll_OBJS) $(libzmq_wrapper_dll_MODULE:.dll=.spec)
+	$(CC) $(libzmq_wrapper_dll_LDFLAGS) -o $@ $(libzmq_wrapper_dll_OBJS) \
+		$(libzmq_wrapper_dll_LIB_PATH) $(libzmq_wrapper_dll_DLL_PATH) $(DEFLIB) \
+		$(libzmq_wrapper_dll_DLLS:%=-l%) $(libzmq_wrapper_dll_LIBRARIES:%=-l%)
 
 
