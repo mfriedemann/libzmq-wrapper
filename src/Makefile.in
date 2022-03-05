@@ -1,0 +1,6 @@
+# Generated from ../libzmq-v120-mt-4_3_5.dll by winedump.
+MODULE    = libzmq_wrapper.dll
+
+
+C_SRCS = \
+	libzmq_wrapper_main.c
