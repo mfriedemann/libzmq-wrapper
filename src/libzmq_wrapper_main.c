@@ -607,8 +607,14 @@ int __cdecl LIBZMQ_WRAPPER_zmq_poller_wait_all(void) {
 
 /******************************************************************
  *	zmq_ppoll (LIBZMQ_WRAPPER.61)
+ *
+ * https://github.com/zeromq/libzmq/commit/36e4c9b474e2ed4f702b89541f3c2653a876a716
+ * NOTE: There is no _ppoll_ or _pselect_ on Windows, so _zmq_ppoll()_ is not
+ * supported in Windows builds. It is still callable, but its 'sigmask' has void
+ * pointer type (because 'sigset_t' is also not available on Windows) and
+ * _zmq_ppoll()_ will return with an error (see error section below).
  */
-int __cdecl LIBZMQ_WRAPPER_zmq_ppoll(zmq_pollitem_t * items, int n, long timeout, void/*sigset_t*/ * sigmask) {
+int __cdecl LIBZMQ_WRAPPER_zmq_ppoll(zmq_pollitem_t * items, int n, long timeout, void * sigmask) {
     FIXME("zmq_ppoll: stub\n");
     return (int) 0;
 }

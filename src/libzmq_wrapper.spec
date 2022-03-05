@@ -11,10 +11,10 @@
 9 cdecl zmq_connect() LIBZMQ_WRAPPER_zmq_connect
 10 cdecl zmq_connect_peer() LIBZMQ_WRAPPER_zmq_connect_peer
 11 cdecl zmq_ctx_destroy() LIBZMQ_WRAPPER_zmq_ctx_destroy
-12 cdecl zmq_ctx_get() LIBZMQ_WRAPPER_zmq_ctx_get
+12 cdecl zmq_ctx_get( ptr long ) LIBZMQ_WRAPPER_zmq_ctx_get
 13 cdecl zmq_ctx_get_ext() LIBZMQ_WRAPPER_zmq_ctx_get_ext
 14 cdecl zmq_ctx_new() LIBZMQ_WRAPPER_zmq_ctx_new
-15 cdecl zmq_ctx_set() LIBZMQ_WRAPPER_zmq_ctx_set
+15 cdecl zmq_ctx_set( ptr long long ) LIBZMQ_WRAPPER_zmq_ctx_set
 16 cdecl zmq_ctx_set_ext() LIBZMQ_WRAPPER_zmq_ctx_set_ext
 17 cdecl zmq_ctx_shutdown() LIBZMQ_WRAPPER_zmq_ctx_shutdown
 18 cdecl zmq_ctx_term() LIBZMQ_WRAPPER_zmq_ctx_term
@@ -23,7 +23,7 @@
 21 cdecl zmq_device( long ptr ptr ) LIBZMQ_WRAPPER_zmq_device
 22 cdecl zmq_disconnect() LIBZMQ_WRAPPER_zmq_disconnect
 23 cdecl zmq_errno() LIBZMQ_WRAPPER_zmq_errno
-24 cdecl zmq_getsockopt() LIBZMQ_WRAPPER_zmq_getsockopt
+24 cdecl zmq_getsockopt( ptr long ptr ptr ) LIBZMQ_WRAPPER_zmq_getsockopt
 25 cdecl zmq_has( str ) LIBZMQ_WRAPPER_zmq_has
 26 cdecl zmq_init( long ) LIBZMQ_WRAPPER_zmq_init
 27 cdecl zmq_join() LIBZMQ_WRAPPER_zmq_join
@@ -60,38 +60,39 @@
 58 cdecl zmq_poller_size() LIBZMQ_WRAPPER_zmq_poller_size
 59 cdecl zmq_poller_wait() LIBZMQ_WRAPPER_zmq_poller_wait
 60 cdecl zmq_poller_wait_all() LIBZMQ_WRAPPER_zmq_poller_wait_all
-61 cdecl zmq_proxy() LIBZMQ_WRAPPER_zmq_proxy
-62 cdecl zmq_proxy_steerable() LIBZMQ_WRAPPER_zmq_proxy_steerable
-63 cdecl zmq_recv() LIBZMQ_WRAPPER_zmq_recv
-64 cdecl zmq_recviov() LIBZMQ_WRAPPER_zmq_recviov
-65 cdecl zmq_recvmsg() LIBZMQ_WRAPPER_zmq_recvmsg
-66 cdecl zmq_send() LIBZMQ_WRAPPER_zmq_send
-67 cdecl zmq_send_const() LIBZMQ_WRAPPER_zmq_send_const
-68 cdecl zmq_sendiov() LIBZMQ_WRAPPER_zmq_sendiov
-69 cdecl zmq_sendmsg() LIBZMQ_WRAPPER_zmq_sendmsg
-70 cdecl zmq_setsockopt() LIBZMQ_WRAPPER_zmq_setsockopt
-71 cdecl zmq_sleep( long ) LIBZMQ_WRAPPER_zmq_sleep
-72 cdecl zmq_socket() LIBZMQ_WRAPPER_zmq_socket
-73 cdecl zmq_socket_get_peer_state() LIBZMQ_WRAPPER_zmq_socket_get_peer_state
-74 cdecl zmq_socket_monitor() LIBZMQ_WRAPPER_zmq_socket_monitor
-75 cdecl zmq_socket_monitor_pipes_stats() LIBZMQ_WRAPPER_zmq_socket_monitor_pipes_stats
-76 cdecl zmq_socket_monitor_versioned() LIBZMQ_WRAPPER_zmq_socket_monitor_versioned
-77 cdecl zmq_stopwatch_intermediate() LIBZMQ_WRAPPER_zmq_stopwatch_intermediate
-78 cdecl zmq_stopwatch_start() LIBZMQ_WRAPPER_zmq_stopwatch_start
-79 cdecl zmq_stopwatch_stop() LIBZMQ_WRAPPER_zmq_stopwatch_stop
-80 cdecl zmq_strerror( long ) LIBZMQ_WRAPPER_zmq_strerror
-81 cdecl zmq_term() LIBZMQ_WRAPPER_zmq_term
-82 cdecl zmq_threadclose() LIBZMQ_WRAPPER_zmq_threadclose
-83 cdecl zmq_threadstart( ptr ptr ) LIBZMQ_WRAPPER_zmq_threadstart
-84 cdecl zmq_timers_add() LIBZMQ_WRAPPER_zmq_timers_add
-85 cdecl zmq_timers_cancel() LIBZMQ_WRAPPER_zmq_timers_cancel
-86 cdecl zmq_timers_destroy() LIBZMQ_WRAPPER_zmq_timers_destroy
-87 cdecl zmq_timers_execute() LIBZMQ_WRAPPER_zmq_timers_execute
-88 cdecl zmq_timers_new() LIBZMQ_WRAPPER_zmq_timers_new
-89 cdecl zmq_timers_reset() LIBZMQ_WRAPPER_zmq_timers_reset
-90 cdecl zmq_timers_set_interval() LIBZMQ_WRAPPER_zmq_timers_set_interval
-91 cdecl zmq_timers_timeout() LIBZMQ_WRAPPER_zmq_timers_timeout
-92 cdecl zmq_unbind() LIBZMQ_WRAPPER_zmq_unbind
-93 cdecl zmq_version( ptr ptr ptr ) LIBZMQ_WRAPPER_zmq_version
-94 cdecl zmq_z85_decode( ptr str ) LIBZMQ_WRAPPER_zmq_z85_decode
-95 cdecl zmq_z85_encode( str ptr long ) LIBZMQ_WRAPPER_zmq_z85_encode
+61 cdecl zmq_ppoll( ptr long long ptr ) LIBZMQ_WRAPPER_zmq_ppoll
+62 cdecl zmq_proxy() LIBZMQ_WRAPPER_zmq_proxy
+63 cdecl zmq_proxy_steerable() LIBZMQ_WRAPPER_zmq_proxy_steerable
+64 cdecl zmq_recv() LIBZMQ_WRAPPER_zmq_recv
+65 cdecl zmq_recviov() LIBZMQ_WRAPPER_zmq_recviov
+66 cdecl zmq_recvmsg() LIBZMQ_WRAPPER_zmq_recvmsg
+67 cdecl zmq_send( ptr ptr long long ) LIBZMQ_WRAPPER_zmq_send
+68 cdecl zmq_send_const() LIBZMQ_WRAPPER_zmq_send_const
+69 cdecl zmq_sendiov() LIBZMQ_WRAPPER_zmq_sendiov
+70 cdecl zmq_sendmsg() LIBZMQ_WRAPPER_zmq_sendmsg
+71 cdecl zmq_setsockopt( ptr long ptr long ) LIBZMQ_WRAPPER_zmq_setsockopt
+72 cdecl zmq_sleep( long ) LIBZMQ_WRAPPER_zmq_sleep
+73 cdecl zmq_socket() LIBZMQ_WRAPPER_zmq_socket
+74 cdecl zmq_socket_get_peer_state() LIBZMQ_WRAPPER_zmq_socket_get_peer_state
+75 cdecl zmq_socket_monitor() LIBZMQ_WRAPPER_zmq_socket_monitor
+76 cdecl zmq_socket_monitor_pipes_stats() LIBZMQ_WRAPPER_zmq_socket_monitor_pipes_stats
+77 cdecl zmq_socket_monitor_versioned() LIBZMQ_WRAPPER_zmq_socket_monitor_versioned
+78 cdecl zmq_stopwatch_intermediate() LIBZMQ_WRAPPER_zmq_stopwatch_intermediate
+79 cdecl zmq_stopwatch_start() LIBZMQ_WRAPPER_zmq_stopwatch_start
+80 cdecl zmq_stopwatch_stop() LIBZMQ_WRAPPER_zmq_stopwatch_stop
+81 cdecl zmq_strerror( long ) LIBZMQ_WRAPPER_zmq_strerror
+82 cdecl zmq_term() LIBZMQ_WRAPPER_zmq_term
+83 cdecl zmq_threadclose() LIBZMQ_WRAPPER_zmq_threadclose
+84 cdecl zmq_threadstart( ptr ptr ) LIBZMQ_WRAPPER_zmq_threadstart
+85 cdecl zmq_timers_add() LIBZMQ_WRAPPER_zmq_timers_add
+86 cdecl zmq_timers_cancel() LIBZMQ_WRAPPER_zmq_timers_cancel
+87 cdecl zmq_timers_destroy() LIBZMQ_WRAPPER_zmq_timers_destroy
+88 cdecl zmq_timers_execute() LIBZMQ_WRAPPER_zmq_timers_execute
+89 cdecl zmq_timers_new() LIBZMQ_WRAPPER_zmq_timers_new
+90 cdecl zmq_timers_reset() LIBZMQ_WRAPPER_zmq_timers_reset
+91 cdecl zmq_timers_set_interval() LIBZMQ_WRAPPER_zmq_timers_set_interval
+92 cdecl zmq_timers_timeout() LIBZMQ_WRAPPER_zmq_timers_timeout
+93 cdecl zmq_unbind() LIBZMQ_WRAPPER_zmq_unbind
+94 cdecl zmq_version( ptr ptr ptr ) LIBZMQ_WRAPPER_zmq_version
+95 cdecl zmq_z85_decode( ptr str ) LIBZMQ_WRAPPER_zmq_z85_decode
+96 cdecl zmq_z85_encode( str ptr long ) LIBZMQ_WRAPPER_zmq_z85_encode

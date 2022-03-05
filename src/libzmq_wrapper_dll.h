@@ -76,6 +76,7 @@ int __cdecl LIBZMQ_WRAPPER_zmq_poller_remove_fd(void);
 int __cdecl LIBZMQ_WRAPPER_zmq_poller_size(void);
 int __cdecl LIBZMQ_WRAPPER_zmq_poller_wait(void);
 int __cdecl LIBZMQ_WRAPPER_zmq_poller_wait_all(void);
+int __cdecl LIBZMQ_WRAPPER_zmq_ppoll(zmq_pollitem_t * items, int nitems, long timeout, void * sigmask);
 int __cdecl LIBZMQ_WRAPPER_zmq_proxy(void);
 int __cdecl LIBZMQ_WRAPPER_zmq_proxy_steerable(void);
 int __cdecl LIBZMQ_WRAPPER_zmq_recv(void);
